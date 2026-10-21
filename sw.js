@@ -2,7 +2,7 @@
    - App page and config: try the network for up to 2.5 seconds, otherwise open from the phone's cache.
    - Library, icons and fonts: served straight from the phone's cache (they never change).
    - Account data (supabase.co) is never cached. */
-const CACHE = "pgcc-tarbia-v7";
+const CACHE = "pgcc-tarbia-v8";
 const SHELL = ["./", "index.html", "config.js", "supabase-adapter.js", "supabase-2.117.2.js", "manifest.webmanifest", "icon-192.png", "apple-touch-icon.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
