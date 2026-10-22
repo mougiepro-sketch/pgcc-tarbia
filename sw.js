@@ -3,7 +3,7 @@
      from the internet in the background, so the next open has any update.
    - Library, icons and fonts: served straight from the phone's cache (they never change).
    - Account data (supabase.co) is never cached. */
-const CACHE = "pgcc-tarbia-v9";
+const CACHE = "pgcc-tarbia-v10";
 const SHELL = ["./", "index.html", "config.js", "supabase-adapter.js", "supabase-2.117.2.js", "manifest.webmanifest", "icon-192.png", "apple-touch-icon.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL.map(u => new Request(u, {cache: "reload"})))).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
